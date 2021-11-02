@@ -1,9 +1,11 @@
-from Logic.CRUD import adauga_obiect, sterge_obiect, modifica_obiect
+from Logic.CRUD import adauga_obiect, sterge_obiect, modifica_obiect, mutare_obiect
+
 
 def printmenu():
     print("1. Adauga obiectul dorit")
     print("2. Sterge obiectul dorit")
     print("3. Modifica obiectul")
+    print("4. Mutare obiect")
     print("a. Afiseaza obiectele")
     print("x. Iesire")
 
@@ -27,6 +29,11 @@ def ui_modificare_obiect(lista):
     locatie = input("Dati noua locatie a obiectului: ")
     return modifica_obiect(id, nume, descriere, pret, locatie, lista)
 
+def ui_mutare_obiect(lista):
+    id = input("Dati id-ul obiectului pe care doriti sa-l mutati: ")
+    locatie = input("Dati noua locatie a obiectului: ")
+    return mutare_obiect(id, locatie, lista)
+
 def run_menu(lista):
     while True:
         printmenu()
@@ -37,6 +44,8 @@ def run_menu(lista):
             lista = ui_sterge_obiect(lista)
         elif optiune == "3":
             lista = ui_modificare_obiect(lista)
+        elif optiune == "4":
+            lista = ui_mutare_obiect(lista)
         elif optiune == "a":
             print(lista)
         elif optiune == "x":

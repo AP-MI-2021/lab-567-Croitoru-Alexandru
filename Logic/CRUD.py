@@ -1,5 +1,5 @@
 #Calcule, retineri de date
-from Domain.Obiect import creeaza_obiect, get_id
+from Domain.Obiect import creeaza_obiect, get_id, get_pret, get_descriere, get_nume
 
 
 def adauga_obiect(id, nume, descriere, pret, locatie, lista): #lista - adaugam lista de dictionare
@@ -56,4 +56,19 @@ def get_by_id(id, lista):
         if get_id(obiect) == id:
             return obiect
     return None
+
+#Functionalitate 2.2
+
+def mutare_obiect(id, locatie, lista):
+    lista_noua = []
+    for obiect in lista:
+        if get_id(obiect) == id:
+            nume = get_nume(obiect)
+            descriere = get_descriere(obiect)
+            pret = get_pret(obiect)
+            obiect_nou = creeaza_obiect(id, nume, descriere, pret, locatie)
+            lista_noua.append(obiect_nou)
+        else:
+            lista_noua.append(obiect)
+    return lista_noua
 
