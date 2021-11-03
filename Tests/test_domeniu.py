@@ -1,4 +1,4 @@
-from Domain.Obiect import creeaza_obiect, get_id, get_nume, get_descriere, get_pret, get_locatie
+from Domain.Obiect1 import creeaza_obiect, get_id, get_nume, get_descriere, get_pret, get_locatie
 
 def test_obiect():
     obiect = creeaza_obiect('1', 'pixuri', 'scriere cu cerneala albastra', 3.2, 'camera 208')
