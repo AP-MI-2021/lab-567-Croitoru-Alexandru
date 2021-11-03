@@ -60,6 +60,13 @@ def get_by_id(id, lista):
 #Functionalitate 2.2
 
 def mutare_obiect(id, locatie, lista):
+    '''
+    Muta un obiect dintr-o locatie in alta
+    :param id: string
+    :param locatie: string
+    :param lista: lista de obiecte
+    :return: obiectul cu noua locatie in lista
+    '''
     lista_noua = []
     for obiect in lista:
         if get_id(obiect) == id:
@@ -75,6 +82,13 @@ def mutare_obiect(id, locatie, lista):
 #Functionalitate 2.3
 
 def concatenare_obiect(str, pret, lista):
+    '''
+    concatezenaza str-ul la descriere daca pretul obiectului este mai mare decat pretul dat
+    :para![](C:/Users/flexr/AppData/Local/Temp/download.jpg)m str: string
+    :param pret: float
+    :param lista: lista de obiecte
+    :return: lista in care s-au concatenat obiectele daca pretul este mai mare decat cel dat
+    '''
     lista_noua = []
     for obiect in lista:
         if get_pret(obiect) > pret:
@@ -88,4 +102,16 @@ def concatenare_obiect(str, pret, lista):
         else:
             lista_noua.append(obiect)
     return lista_noua
+
+
+
+
+
+
+
+
+
+
+
+
 
