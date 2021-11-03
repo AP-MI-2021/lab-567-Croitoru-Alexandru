@@ -1,4 +1,4 @@
-from Logic.CRUD import adauga_obiect, sterge_obiect, modifica_obiect, mutare_obiect
+from Logic.CRUD import adauga_obiect, sterge_obiect, modifica_obiect, mutare_obiect, concatenare_obiect
 
 
 def printmenu():
@@ -6,6 +6,7 @@ def printmenu():
     print("2. Sterge obiectul dorit")
     print("3. Modifica obiectul")
     print("4. Mutare obiect")
+    print("5. Concatenare string cu descrierea obiectului daca pretul obiectului este mai mare decat cel dat")
     print("a. Afiseaza obiectele")
     print("x. Iesire")
 
@@ -34,6 +35,11 @@ def ui_mutare_obiect(lista):
     locatie = input("Dati noua locatie a obiectului: ")
     return mutare_obiect(id, locatie, lista)
 
+def ui_concatenare_obiect(lista):
+    pret = float(input("Dati pretul: "))
+    str = input("Dati string-ul ce doriti sa fie concatenat: ")
+    return concatenare_obiect(str, pret, lista)
+
 def run_menu(lista):
     while True:
         printmenu()
@@ -46,6 +52,8 @@ def run_menu(lista):
             lista = ui_modificare_obiect(lista)
         elif optiune == "4":
             lista = ui_mutare_obiect(lista)
+        elif optiune == "5":
+            lista = ui_concatenare_obiect(lista)
         elif optiune == "a":
             print(lista)
         elif optiune == "x":
