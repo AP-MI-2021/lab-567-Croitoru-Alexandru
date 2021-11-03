@@ -1,5 +1,5 @@
 #Calcule, retineri de date
-from Domain.Obiect import creeaza_obiect, get_id, get_pret, get_descriere, get_nume, get_locatie
+from Domain.Obiect1 import creeaza_obiect, get_id, get_pret, get_descriere, get_nume, get_locatie
 
 
 def adauga_obiect(id, nume, descriere, pret, locatie, lista): #lista - adaugam lista de dictionare
