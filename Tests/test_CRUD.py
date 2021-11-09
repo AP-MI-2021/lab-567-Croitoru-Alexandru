@@ -1,5 +1,6 @@
-from Domain.Obiect1 import get_id, get_nume, get_descriere, get_pret, get_locatie
-from Logic.CRUD import adauga_obiect, get_by_id, sterge_obiect, mutare_obiect, concatenare_obiect
+from Domain.Obiect import get_id, get_nume, get_descriere, get_pret, get_locatie
+from Logic.CRUD import adauga_obiect, get_by_id, sterge_obiect, mutare_obiect, concatenare_obiect, cmmp_locatie, \
+    ordonare_obiecte_pret
 
 
 def test_adauga_obiect():
@@ -63,3 +64,32 @@ def test_concatenare_obiect():
     assert get_descriere(obiect_concatenat1) == "carbune"
     assert get_descriere(obiect_concatenat2) == "tus"
     assert get_descriere(obiect_concatenat3) == "cernealaverde"
+
+#Functionalitate 2.4
+
+def test_cmmp_locatie():
+    lista = []
+    lista = adauga_obiect('1', 'pixuri', 'albastra', 3.2, 'camera 233', lista)
+    lista = adauga_obiect('2', 'creioane', 'carbune', 1.6, 'camera 233', lista)
+    lista = adauga_obiect('3', 'carioca', 'tus', 5.1, 'camera 245', lista)
+    lista = adauga_obiect('4', 'rigle', 'cerneala', 10, 'camera 245', lista)
+
+    assert cmmp_locatie('camera 233', lista) == 3.2
+    assert cmmp_locatie('camera 245', lista) == 10
+
+#Functionalitate 2.5
+
+def test_ordonare_obiecte_pret():
+    lista = []
+    lista = adauga_obiect('1', 'pixuri', 'albastra', 3.2, 'camera 233', lista)
+    lista = adauga_obiect('2', 'creioane', 'carbune', 1.6, 'camera 233', lista)
+    lista = adauga_obiect('3', 'carioca', 'tus', 5.1, 'camera 245', lista)
+    lista = adauga_obiect('4', 'rigle', 'cerneala', 10, 'camera 245', lista)
+
+    lista_sortata = ordonare_obiecte_pret(lista)
+
+    assert get_id(lista_sortata([0])) == 4
+    assert get_id(lista_sortata([1])) == 3
+    assert get_id(lista_sortata([2])) == 1
+    assert get_id(lista_sortata([3])) == 2
+

@@ -1,6 +1,5 @@
 #Calcule, retineri de date
-from Domain.Obiect1 import creeaza_obiect, get_id, get_pret, get_descriere, get_nume, get_locatie
-
+from Domain.Obiect import creeaza_obiect, get_id, get_pret, get_descriere, get_nume, get_locatie
 
 def adauga_obiect(id, nume, descriere, pret, locatie, lista): #lista - adaugam lista de dictionare
     '''
@@ -103,8 +102,35 @@ def concatenare_obiect(str, pret, lista):
             lista_noua.append(obiect)
     return lista_noua
 
+#Functionalitate 2.4
 
+def cmmp_locatie(locatie, lista):
+    '''
+    Determinarea cel mai mare preț pentru fiecare locație.
+    :param locatie: string
+    :param lista: lista de obiecte
+    :return: obiectul cu pretul cel mai mare dintr-o locatie anume.
+    '''
 
+    max = 0
+    for obiect in lista:
+        if get_locatie(obiect) == locatie:
+            pret = get_pret(obiect)
+            if max == None or pret > max:
+                max = pret
+    return max
+
+#Functionalitate 2.5
+
+def ordonare_obiecte_pret(lista):
+    '''
+    Ordoneaza obiectele crescator dupa pretul de achizitie
+    :param lista: lista de obiecte
+    :return: returneaza crescator lista de preturi
+    '''
+
+    lista_sortata = sorted(lista, key=lambda obiect: get_pret(obiect))
+    return lista_sortata
 
 
 

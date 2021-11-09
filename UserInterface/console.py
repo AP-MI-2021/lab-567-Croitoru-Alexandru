@@ -1,4 +1,5 @@
-from Logic.CRUD import adauga_obiect, sterge_obiect, modifica_obiect, mutare_obiect, concatenare_obiect
+from Logic.CRUD import adauga_obiect, sterge_obiect, modifica_obiect, mutare_obiect, concatenare_obiect, \
+    ordonare_obiecte_pret, cmmp_locatie
 
 
 def printmenu():
@@ -7,6 +8,8 @@ def printmenu():
     print("3. Modifica obiectul")
     print("4. Mutare obiect")
     print("5. Concatenare string cu descrierea obiectului daca pretul obiectului este mai mare decat cel dat")
+    print("6. Determina cel mai mare preț pentru fiecare locație")
+    print("7. Ordona obiectele crescător după prețul de achiziție")
     print("a. Afiseaza obiectele")
     print("x. Iesire")
 
@@ -40,6 +43,15 @@ def ui_concatenare_obiect(lista):
     str = input("Dati string-ul ce doriti sa fie concatenat: ")
     return concatenare_obiect(str, pret, lista)
 
+def ui_cmmp_locatie(lista):
+    locatie = input("Dati locatia unde doriti sa se realizeze determinarea obiectului cu cel mai mare pret: ")
+    return cmmp_locatie(locatie, lista)
+
+def ui_ordonare_obiecte_pret(lista):
+    lista_sortata = ordonare_obiecte_pret(lista)
+    return lista_sortata
+
+
 def run_menu(lista):
     while True:
         printmenu()
@@ -54,6 +66,11 @@ def run_menu(lista):
             lista = ui_mutare_obiect(lista)
         elif optiune == "5":
             lista = ui_concatenare_obiect(lista)
+        elif optiune == "6":
+            lista = ui_cmmp_locatie(lista)
+            print(max)
+        elif optiune == "7":
+            lista = ui_ordonare_obiecte_pret(lista)
         elif optiune == "a":
             print(lista)
         elif optiune == "x":
