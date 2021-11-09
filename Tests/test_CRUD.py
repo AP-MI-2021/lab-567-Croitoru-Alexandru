@@ -88,8 +88,8 @@ def test_ordonare_obiecte_pret():
 
     lista_sortata = ordonare_obiecte_pret(lista)
 
-    assert get_id(lista_sortata([0])) == 4
-    assert get_id(lista_sortata([1])) == 3
-    assert get_id(lista_sortata([2])) == 1
-    assert get_id(lista_sortata([3])) == 2
+    assert get_id(lista_sortata[0]) == '2'
+    assert get_id(lista_sortata[1]) == '1'
+    assert get_id(lista_sortata[2]) == '3'
+    assert get_id(lista_sortata[3]) == '4'
 
