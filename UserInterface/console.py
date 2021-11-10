@@ -103,7 +103,7 @@ def run_menu(lista):
             print(lista)
         elif optiune == 'u':
             if len(undolist) > 0:
-                lista = undolist.pop
+                lista = undolist.pop()
             else:
                 print('Nu se mai poate da undo!')
         elif optiune == 'r':
@@ -116,3 +116,4 @@ def run_menu(lista):
             break
         else:
             print("Optiune eronata, reincercati!")
+

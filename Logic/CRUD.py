@@ -151,6 +151,21 @@ def suma_preturi_locatie(lista):
             rezultat[locatie] = get_pret(obiect)
     return rezultat
 
+# UNDO / REDO
+def do_undo(undolist: list, redolist: list, currentlist: list):
+    if undolist:
+        redolist.append(currentlist)
+        return undolist.pop()
+    return None
+
+
+def do_redo(undolist: list, redolist: list, currentlist: list):
+    if redolist:
+        undolist.append(currentlist)
+        return redolist.pop()
+    else:
+        return None
+
 
 
 

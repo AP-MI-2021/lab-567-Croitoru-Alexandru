@@ -1,6 +1,6 @@
 from Domain.Obiect import get_id, get_nume, get_descriere, get_pret, get_locatie
 from Logic.CRUD import adauga_obiect, get_by_id, sterge_obiect, mutare_obiect, concatenare_obiect, cmmp_locatie, \
-    ordonare_obiecte_pret, suma_preturi_locatie
+    ordonare_obiecte_pret, suma_preturi_locatie, do_undo
 
 
 def test_adauga_obiect():
@@ -104,3 +104,18 @@ def test_suma_preturi_locatie():
 
     assert rezultat['camera 233'] == 7.8
     assert rezultat['camera 245'] == 15.1
+
+def test_undo_redo():
+    lista = []
+    undolist = []
+    redolist = []
+    lista = adauga_obiect('1', 'pixuri', 'albastra', 3, 'camera 233', lista, undolist, redolist)
+    lista = adauga_obiect('2', 'creioane', 'carbune', 4.8, 'camera 233', lista, undolist, redolist)
+    lista = adauga_obiect('3', 'carioca', 'tus', 5.1, 'camera 245', lista, undolist, redolist)
+    lista = adauga_obiect('4', 'rigle', 'cerneala', 10, 'camera 245', lista, undolist, redolist)
+
+    lista = do_undo(lista, undolist, redolist)
+    lista = do_undo(lista, undolist, redolist)
+
+    assert len(lista) == 1
+
