@@ -14,30 +14,37 @@ def printmenu():
     print("a. Afiseaza obiectele")
     print("x. Iesire")
 
-def ui_adauga_obiect(lista):
+def ui_adauga_obiect(lista, undolist):
     id = input("Dati id-ul obiectului: ")
     nume = input("Dati numele obiectului: ")
     descriere = input("Dati descrierea: ")
     pret = float(input("Dati pretul obiectului: "))
     locatie = input("Dati locatia obiectului: ")
-    return adauga_obiect(id, nume, descriere, pret, locatie, lista)
+    rezultat = adauga_obiect(id, nume, descriere, pret, locatie, lista)
+    undolist.append(lista)
+    return rezultat
 
-def ui_sterge_obiect(lista):
+def ui_sterge_obiect(lista, undolist):
     id = input("Dati id-ul obiectului ce trebuie sters: ")
-    return sterge_obiect(id, lista)
+    rezultat = sterge_obiect(id, lista)
+    undolist.append(lista)
+    return rezultat
 
-def ui_modificare_obiect(lista):
+def ui_modificare_obiect(lista, undolist):
     id = input("Dati noul id obiectului: ")
     nume = input("Dati noul numele obiectului: ")
     descriere = input("Dati noua descriere: ")
     pret = float(input("Dati noul pret al obiectului: "))
     locatie = input("Dati noua locatie a obiectului: ")
-    return modifica_obiect(id, nume, descriere, pret, locatie, lista)
+    rezultat = modifica_obiect(id, nume, descriere, pret, locatie, lista)
+    undolist.append(lista)
+    return rezultat
 
 def ui_mutare_obiect(lista):
     id = input("Dati id-ul obiectului pe care doriti sa-l mutati: ")
     locatie = input("Dati noua locatie a obiectului: ")
-    return mutare_obiect(id, locatie, lista)
+    rezultat = mutare_obiect(id, locatie, lista)
+    return rezultat
 
 def ui_concatenare_obiect(lista):
     pret = float(input("Dati pretul: "))
@@ -58,15 +65,16 @@ def ui_suma_preturi_locatie(lista):
         print("Locatia {} are suma preturilor {}".format(locatie, rezultat[locatie]))
 
 def run_menu(lista):
+    undolist = []
     while True:
         printmenu()
         optiune = input("Dati optiunea: ")
         if optiune == "1":
-            lista = ui_adauga_obiect(lista)
+            lista = ui_adauga_obiect(lista, undolist)
         elif optiune == "2":
-            lista = ui_sterge_obiect(lista)
+            lista = ui_sterge_obiect(lista, undolist)
         elif optiune == "3":
-            lista = ui_modificare_obiect(lista)
+            lista = ui_modificare_obiect(lista, undolist)
         elif optiune == "4":
             lista = ui_mutare_obiect(lista)
         elif optiune == "5":
@@ -80,6 +88,11 @@ def run_menu(lista):
             lista = ui_suma_preturi_locatie(lista)
         elif optiune == "a":
             print(lista)
+        elif optiune == 'u':
+            if len(undolist) > 0:
+                lista = undolist.pop
+            else:
+                print('Nu se mai poate da undo!')
         elif optiune == "x":
             break
         else:
