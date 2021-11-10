@@ -1,5 +1,5 @@
 from Logic.CRUD import adauga_obiect, sterge_obiect, modifica_obiect, mutare_obiect, concatenare_obiect, \
-    ordonare_obiecte_pret, cmmp_locatie
+    ordonare_obiecte_pret, cmmp_locatie, suma_preturi_locatie
 
 
 def printmenu():
@@ -10,6 +10,7 @@ def printmenu():
     print("5. Concatenare string cu descrierea obiectului daca pretul obiectului este mai mare decat cel dat")
     print("6. Determina cel mai mare preț pentru fiecare locație")
     print("7. Ordona obiectele crescător după prețul de achiziție")
+    print("8. Afiseaza suma preturilor de pe fiecare locatie")
     print("a. Afiseaza obiectele")
     print("x. Iesire")
 
@@ -51,6 +52,10 @@ def ui_ordonare_obiecte_pret(lista):
     lista_sortata = ordonare_obiecte_pret(lista)
     return lista_sortata
 
+def ui_suma_preturi_locatie(lista):
+    rezultat = suma_preturi_locatie(lista)
+    for locatie in rezultat:
+        print("Locatia {} are suma preturilor {}".format(locatie, rezultat[locatie]))
 
 def run_menu(lista):
     while True:
@@ -71,6 +76,8 @@ def run_menu(lista):
             print(max)
         elif optiune == "7":
             lista = ui_ordonare_obiecte_pret(lista)
+        elif optiune == "8":
+            lista = ui_suma_preturi_locatie(lista)
         elif optiune == "a":
             print(lista)
         elif optiune == "x":

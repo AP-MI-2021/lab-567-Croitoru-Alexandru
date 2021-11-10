@@ -132,6 +132,24 @@ def ordonare_obiecte_pret(lista):
     lista_sortata = sorted(lista, key=lambda obiect: get_pret(obiect))
     return lista_sortata
 
+#Functionalitate 2.6
+
+def suma_preturi_locatie(lista):
+    '''
+    Afiseaza suma preturilor dintr-o locatie
+    :param lista: lista cu obiecte
+    :return: returneaza suma preturilor pe o anumita locatie
+    '''
+
+    rezultat = {}
+
+    for obiect in lista:
+        locatie = get_locatie(obiect)
+        if locatie in rezultat:
+            rezultat[locatie] = rezultat[locatie] + get_pret(obiect)
+        else:
+            rezultat[locatie] = get_pret(obiect)
+    return rezultat
 
 
 
