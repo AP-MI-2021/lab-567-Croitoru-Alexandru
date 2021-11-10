@@ -11,10 +11,12 @@ def printmenu():
     print("6. Determina cel mai mare preț pentru fiecare locație")
     print("7. Ordona obiectele crescător după prețul de achiziție")
     print("8. Afiseaza suma preturilor de pe fiecare locatie")
+    print("u. Undo")
+    print("r. Redo")
     print("a. Afiseaza obiectele")
     print("x. Iesire")
 
-def ui_adauga_obiect(lista, undolist):
+def ui_adauga_obiect(lista, undolist, redolist):
     id = input("Dati id-ul obiectului: ")
     nume = input("Dati numele obiectului: ")
     descriere = input("Dati descrierea: ")
@@ -22,15 +24,17 @@ def ui_adauga_obiect(lista, undolist):
     locatie = input("Dati locatia obiectului: ")
     rezultat = adauga_obiect(id, nume, descriere, pret, locatie, lista)
     undolist.append(lista)
+    redolist.clear()
     return rezultat
 
-def ui_sterge_obiect(lista, undolist):
+def ui_sterge_obiect(lista, undolist, redolist):
     id = input("Dati id-ul obiectului ce trebuie sters: ")
     rezultat = sterge_obiect(id, lista)
     undolist.append(lista)
+    redolist.clear()
     return rezultat
 
-def ui_modificare_obiect(lista, undolist):
+def ui_modificare_obiect(lista, undolist, redolist):
     id = input("Dati noul id obiectului: ")
     nume = input("Dati noul numele obiectului: ")
     descriere = input("Dati noua descriere: ")
@@ -38,25 +42,33 @@ def ui_modificare_obiect(lista, undolist):
     locatie = input("Dati noua locatie a obiectului: ")
     rezultat = modifica_obiect(id, nume, descriere, pret, locatie, lista)
     undolist.append(lista)
+    redolist.clear()
     return rezultat
 
-def ui_mutare_obiect(lista):
+def ui_mutare_obiect(lista, undolist, redolist):
     id = input("Dati id-ul obiectului pe care doriti sa-l mutati: ")
     locatie = input("Dati noua locatie a obiectului: ")
     rezultat = mutare_obiect(id, locatie, lista)
+    undolist.append(lista)
+    redolist.clear()
     return rezultat
 
-def ui_concatenare_obiect(lista):
+def ui_concatenare_obiect(lista, undolist, redolist):
     pret = float(input("Dati pretul: "))
     str = input("Dati string-ul ce doriti sa fie concatenat: ")
-    return concatenare_obiect(str, pret, lista)
+    rezultat = concatenare_obiect(str, pret, lista)
+    undolist.append(lista)
+    redolist.clear()
+    return rezultat
 
 def ui_cmmp_locatie(lista):
     locatie = input("Dati locatia unde doriti sa se realizeze determinarea obiectului cu cel mai mare pret: ")
     return cmmp_locatie(locatie, lista)
 
-def ui_ordonare_obiecte_pret(lista):
+def ui_ordonare_obiecte_pret(lista, undolist, redolist):
     lista_sortata = ordonare_obiecte_pret(lista)
+    undolist.append(lista)
+    redolist.clear()
     return lista_sortata
 
 def ui_suma_preturi_locatie(lista):
@@ -66,24 +78,25 @@ def ui_suma_preturi_locatie(lista):
 
 def run_menu(lista):
     undolist = []
+    redolist = []
     while True:
         printmenu()
         optiune = input("Dati optiunea: ")
         if optiune == "1":
-            lista = ui_adauga_obiect(lista, undolist)
+            lista = ui_adauga_obiect(lista, undolist, redolist)
         elif optiune == "2":
-            lista = ui_sterge_obiect(lista, undolist)
+            lista = ui_sterge_obiect(lista, undolist, redolist)
         elif optiune == "3":
-            lista = ui_modificare_obiect(lista, undolist)
+            lista = ui_modificare_obiect(lista, undolist, redolist)
         elif optiune == "4":
-            lista = ui_mutare_obiect(lista)
+            lista = ui_mutare_obiect(lista, undolist, redolist)
         elif optiune == "5":
-            lista = ui_concatenare_obiect(lista)
+            lista = ui_concatenare_obiect(lista, undolist, redolist)
         elif optiune == "6":
             lista = ui_cmmp_locatie(lista)
             print(max)
         elif optiune == "7":
-            lista = ui_ordonare_obiecte_pret(lista)
+            lista = ui_ordonare_obiecte_pret(lista, undolist, redolist)
         elif optiune == "8":
             lista = ui_suma_preturi_locatie(lista)
         elif optiune == "a":
@@ -93,6 +106,12 @@ def run_menu(lista):
                 lista = undolist.pop
             else:
                 print('Nu se mai poate da undo!')
+        elif optiune == 'r':
+            if len(redolist) > 0:
+                undolist.append(lista)
+                lista = redolist.pop()
+            else:
+                print("Nu se mai poate da redo!")
         elif optiune == "x":
             break
         else:
