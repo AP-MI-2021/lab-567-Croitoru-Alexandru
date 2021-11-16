@@ -76,7 +76,24 @@ def ui_suma_preturi_locatie(lista):
     for locatie in rezultat:
         print("Locatia {} are suma preturilor {}".format(locatie, rezultat[locatie]))
 
+def ui_undo(lista, undolist, redolist):
+    if len(undolist) > 0:
+        redolist.append(lista)
+        lista = undolist.pop()
+        print(lista)
+    else:
+        print("Nu se mai poate da redo!")
+
+def ui_redo(lista, undolist, redolist):
+    if len(redolist) > 0:
+        undolist.append(lista)
+        lista = redolist.pop()
+        print(lista)
+    else:
+        print("Nu se mai poate da redo!")
+
 def run_menu(lista):
+    obiect = []
     undolist = []
     redolist = []
     while True:
@@ -102,16 +119,9 @@ def run_menu(lista):
         elif optiune == "a":
             print(lista)
         elif optiune == 'u':
-            if len(undolist) > 0:
-                lista = undolist.pop()
-            else:
-                print('Nu se mai poate da undo!')
+            ui_undo(lista, undolist, redolist)
         elif optiune == 'r':
-            if len(redolist) > 0:
-                undolist.append(lista)
-                lista = redolist.pop()
-            else:
-                print("Nu se mai poate da redo!")
+            ui_redo(lista, undolist, redolist)
         elif optiune == "x":
             break
         else:

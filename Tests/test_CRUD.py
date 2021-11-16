@@ -1,6 +1,7 @@
 from Domain.Obiect import get_id, get_nume, get_descriere, get_pret, get_locatie
 from Logic.CRUD import adauga_obiect, get_by_id, sterge_obiect, mutare_obiect, concatenare_obiect, cmmp_locatie, \
-    ordonare_obiecte_pret, suma_preturi_locatie, do_undo
+    ordonare_obiecte_pret, suma_preturi_locatie
+from UserInterface.console import ui_adauga_obiect, ui_undo
 
 
 def test_adauga_obiect():
@@ -105,17 +106,28 @@ def test_suma_preturi_locatie():
     assert rezultat['camera 233'] == 7.8
     assert rezultat['camera 245'] == 15.1
 
+# UNDO / REDO
+
 def test_undo_redo():
     lista = []
     undolist = []
     redolist = []
-    lista = adauga_obiect('1', 'pixuri', 'albastra', 3, 'camera 233', lista, undolist, redolist)
-    lista = adauga_obiect('2', 'creioane', 'carbune', 4.8, 'camera 233', lista, undolist, redolist)
-    lista = adauga_obiect('3', 'carioca', 'tus', 5.1, 'camera 245', lista, undolist, redolist)
-    lista = adauga_obiect('4', 'rigle', 'cerneala', 10, 'camera 245', lista, undolist, redolist)
 
-    lista = do_undo(lista, undolist, redolist)
-    lista = do_undo(lista, undolist, redolist)
+    lista = adauga_obiect('1', 'pixuri', 'albastra', 3, 'camera 233', lista)
+    lista = adauga_obiect('2', 'creioane', 'carbune', 4.8, 'camera 233', lista)
+    lista = adauga_obiect('3', 'carioca', 'tus', 5.1, 'camera 245', lista)
+    lista = adauga_obiect('4', 'rigle', 'cerneala', 10, 'camera 245', lista)
 
-    assert len(lista) == 1
+    assert len(lista) == 4
+
+    lista = ui_undo(lista, undolist, redolist)
+
+    assert len(lista) == 3
+    assert get_by_id('1',lista) is not None
+    assert get_by_id('2', lista) is not None
+    assert get_by_id('3', lista) is not None
+    assert get_by_id('4', lista) in None
+
+
+
 
