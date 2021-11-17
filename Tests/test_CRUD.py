@@ -114,19 +114,24 @@ def test_undo_redo():
     redolist = []
 
     lista = adauga_obiect('1', 'pixuri', 'albastra', 3, 'camera 233', lista)
+    undolist.append(lista)
     lista = adauga_obiect('2', 'creioane', 'carbune', 4.8, 'camera 233', lista)
+    undolist.append(lista)
     lista = adauga_obiect('3', 'carioca', 'tus', 5.1, 'camera 245', lista)
+    undolist.append(lista)
     lista = adauga_obiect('4', 'rigle', 'cerneala', 10, 'camera 245', lista)
+    undolist.append(lista)
 
     assert len(lista) == 4
 
-    lista = ui_undo(lista, undolist, redolist)
+    lista, undolist, redolist = ui_undo(lista, undolist, redolist)
 
     assert len(lista) == 3
     assert get_by_id('1',lista) is not None
     assert get_by_id('2', lista) is not None
     assert get_by_id('3', lista) is not None
     assert get_by_id('4', lista) in None
+
 
 
 

@@ -79,18 +79,18 @@ def ui_suma_preturi_locatie(lista):
 def ui_undo(lista, undolist, redolist):
     if len(undolist) > 0:
         redolist.append(lista)
-        lista = undolist.pop()
-        print(lista)
-    else:
-        print("Nu se mai poate da redo!")
+        undolist.pop()
+        lista = undolist
+        return lista, undolist, redolist
+    return None
 
 def ui_redo(lista, undolist, redolist):
     if len(redolist) > 0:
         undolist.append(lista)
         lista = redolist.pop()
-        print(lista)
-    else:
-        print("Nu se mai poate da redo!")
+        return lista, undolist, redolist
+    return None
+
 
 def run_menu(lista):
     obiect = []
